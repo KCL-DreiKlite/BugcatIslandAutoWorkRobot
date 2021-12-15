@@ -1,14 +1,16 @@
 package priv.kcl.bugcatisland.autoworkrobot;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 public class Main {
+    static {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] %5$s%6$s%n");
+    }
     public static void main(String[] args) {
         try {
-            Logger logger = Logger.getLogger(AutoRobot.LOGGER_NAME);
-
             Scanner scanner = new Scanner(System.in);
             System.out.print("Robot start offset in second (default: 10 sec.) = ");
             String input = scanner.nextLine();
@@ -18,8 +20,10 @@ public class Main {
             else
                 startTimeOffset = Long.parseLong(input);
 
-            logger.log(Level.INFO, "Robot will be started after " + startTimeOffset + " second.");
-            logger.log(Level.INFO, "You can stop program anytime by type in Ctrl + C or just simply close this window.");
+            Logger logger = Logger.getLogger(AutoRobot.LOGGER_NAME);
+
+            logger.info("Robot will be started after " + startTimeOffset + " second.");
+            logger.info("You can stop program anytime by type in Ctrl + C or just simply close this window.");
 
             new AutoRobot(startTimeOffset * 1000);
         }
