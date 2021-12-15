@@ -2,21 +2,29 @@ package priv.kcl.bugcatisland.autoworkrobot;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AutoRobot implements Runnable {
     public static final int DEFAULT_OPERATION_DELAY = 200;
     public static final int ONE_HOUR_DELAY = 3610000;
 
+    public static final String LOGGER_NAME = "AutoWorkRobotLog";
+
     private Robot robot;
+
+    private Logger logger;
 
     public AutoRobot(long timeOffset) {
         try {
+            logger = Logger.getLogger(LOGGER_NAME);
+
             robot = new Robot();
             robot.setAutoDelay(DEFAULT_OPERATION_DELAY);
 
             Thread.sleep(timeOffset);
 
-            System.out.println("Robot started...");
+            logger.log(Level.INFO, "Robot started...");
             new Thread(this).start();
         }
         catch (Exception e) {
@@ -29,9 +37,9 @@ public class AutoRobot implements Runnable {
     public void run() {
         try {
             while (true) {
-                System.out.println("Typing...");
+                logger.log(Level.INFO, "Typing...");
                 typeWork();
-                System.out.println("Type in completed. Now waiting...");
+                logger.log(Level.INFO, "Type in completed. Now waiting...");
                 Thread.sleep(ONE_HOUR_DELAY);
             }
         }
