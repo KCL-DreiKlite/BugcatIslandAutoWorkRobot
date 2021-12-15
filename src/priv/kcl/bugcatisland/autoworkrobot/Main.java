@@ -9,6 +9,7 @@ public class Main {
     static {
         System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] %5$s%6$s%n");
     }
+
     public static void main(String[] args) {
         try {
             Scanner scanner = new Scanner(System.in);
