@@ -29,6 +29,8 @@ public class AutoRobot {
             "Author: __**KCL (KCL#7118)**__\n" +
             "SHA256 License:\n" +
             "__**b95b7125c6d21a24e88b85d88ddd0853c5e3b4f108bae0e2bf91949971d9f760**__\n" +
+            "Github:\n" +
+            "https://github.com/KCL-DreiKlite/BugcatIslandAutoWorkRobot\n" +
             "======================================================";
 
     public static final String LOGGER_NAME = "AutoWorkRobotLog";
