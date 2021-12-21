@@ -1,5 +1,8 @@
 package priv.kcl.bugcatisland.autoworkrobot;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +15,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
+//        String string = "This is a copied string";
+//        StringSelection stringSelection = new StringSelection(string);
+//        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+//        clipboard.setContents(stringSelection, null);
+
         try {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Robot start offset in second (default: 10 sec.) = ");

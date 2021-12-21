@@ -11,6 +11,11 @@ public class AutoRobot {
     public static final int ONE_HOUR_DELAY = 3610000;
     public static final int ONE_MINUTE_DELAY = 70000;
 
+    public static final String AUTO_WORK_ROBOT_LICENSE_INFO =
+            "=================================\n" +
+            "This robot is made for auto work,\n" +
+            "auto gamble, and auto ";
+
     public static final String LOGGER_NAME = "AutoWorkRobotLog";
 
     private Robot robot;
