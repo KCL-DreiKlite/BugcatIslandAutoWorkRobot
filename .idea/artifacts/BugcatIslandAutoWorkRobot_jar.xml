@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BugcatIslandAutoWorkRobot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/BugcatIslandAutoWorkRobot_jar</output-path>
+    <root id="archive" name="BugcatIslandAutoWorkRobot.jar">
+      <element id="module-output" name="BugcatIslandAutoWorkRobot" />
+    </root>
+  </artifact>
+</component>
