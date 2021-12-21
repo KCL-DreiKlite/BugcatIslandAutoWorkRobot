@@ -1,6 +1,8 @@
 package priv.kcl.bugcatisland.autoworkrobot;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,10 +13,23 @@ public class AutoRobot {
     public static final int ONE_HOUR_DELAY = 3610000;
     public static final int ONE_MINUTE_DELAY = 70000;
 
-    public static final String AUTO_WORK_ROBOT_LICENSE_INFO =
-            "=================================\n" +
-            "This robot is made for auto work,\n" +
-            "auto gamble, and auto ";
+    public static final String AUTO_WORK_ROBOT_START__INFO =
+            "\n" +
+            ">>> ======================================================\n" +
+            "This robot is made for automatically work, gamble,\n" +
+            "and receive daily reward. You may only use this\n" +
+            "robot in Discord server: BUGCAT ISLAND, which\n" +
+            "originally created by YARA, the author of \"Bugcat\n" +
+            "Capoo\". Also, this robot can be operated in \"Dogdog\n" +
+            "bot command text channel\" only. If you use this in\n" +
+            "any other text channel, you will be punished by\n" +
+            "administrator, so be careful when you trying to use\n" +
+            "this robot.\n" +
+            "\n" +
+            "Author: __**KCL (KCL#7118)**__\n" +
+            "SHA256 License:\n" +
+            "__**b95b7125c6d21a24e88b85d88ddd0853c5e3b4f108bae0e2bf91949971d9f760**__\n" +
+            "======================================================";
 
     public static final String LOGGER_NAME = "AutoWorkRobotLog";
 
@@ -26,14 +41,19 @@ public class AutoRobot {
         try {
             logger = Logger.getLogger(LOGGER_NAME);
 
+            // Define a new robot.
             robot = new Robot();
             robot.setAutoDelay(DEFAULT_OPERATION_DELAY);
 
             Thread.sleep(timeOffset);
 
-
-
             logger.log(Level.INFO, "Robot started...");
+
+            // Enter robot license first.
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(new StringSelection(AUTO_WORK_ROBOT_START__INFO), null);
+            inputCtrlV();
+
             // Auto work thread
             new Thread(() -> {
                 try {
@@ -93,7 +113,7 @@ public class AutoRobot {
             return;
         }
 
-        typeString("/work");
+        inputString("/work");
     }
 
     private void typeDice(int coins) {
@@ -102,7 +122,7 @@ public class AutoRobot {
             return;
         }
 
-        typeString("/dice " + coins);
+        inputString("/dice " + coins);
     }
 
     private void typeDaily() {
@@ -111,10 +131,10 @@ public class AutoRobot {
             return;
         }
 
-        typeString("/daily");
+        inputString("/daily");
     }
 
-    private synchronized void typeString(String input) {
+    private synchronized void inputString(String input) {
         if (robot == null) {
             System.err.println("Error! Robot is not declared!");
             return;
@@ -123,12 +143,12 @@ public class AutoRobot {
         input = input.toUpperCase();
 
         for (char c : input.toCharArray())
-            typeCharacter(c);
-        typeCharacter('\t');
-        typeCharacter('\n');
+            inputCharacter(c);
+        inputCharacter('\t');
+        inputCharacter('\n');
     }
 
-    private synchronized void typeCharacter(char character) {
+    private synchronized void inputCharacter(char character) {
         if (robot == null) {
             System.err.println("Error! Robot is not declared!");
             return;
@@ -136,5 +156,19 @@ public class AutoRobot {
 
         robot.keyPress(character);
         robot.keyRelease(character);
+    }
+
+    private synchronized void inputCtrlV() {
+        if (robot == null) {
+            System.err.println("Error! Robot is not declared!");
+            return;
+        }
+
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyRelease(KeyEvent.VK_V);
+
+        inputCharacter('\n');
     }
 }
