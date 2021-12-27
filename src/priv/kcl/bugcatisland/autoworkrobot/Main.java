@@ -21,9 +21,75 @@ public class Main {
 //        clipboard.setContents(stringSelection, null);
 
         try {
+            // Define new console scanner.
             Scanner scanner = new Scanner(System.in);
+
+            // Let scanner have a place to store input
+            String input;
+
+            // Define logger.
+//            Logger logger = Logger.getLogger(AutoRobot.LOGGER_NAME);
+
+            // Let user select auto mode.
+            int autoMode;
+            while (true) {
+                System.out.print(
+                        "Which robot do you prefer to use?\n" +
+                        "1) Work only\n" +
+                        "2) Work and receive Daily reward\n" +
+                        "3) Work, receive Daily reward, and gamble\n" +
+                        "[Default: 3] : ");
+                input = scanner.nextLine();
+                if (input.equals("")) {
+                    autoMode = AutoRobot.WORK_DAILY_GAMBLE;
+                }
+                else {
+                    try {
+                        int tmp = Integer.parseInt(input);
+                        if (tmp < 1 || tmp > 3) {
+                            System.out.println("Please enter a valid number\n");
+                            continue;
+                        }
+                        autoMode = tmp;
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid number\n");
+                        continue;
+                    }
+                }
+                break;
+            }
+
+            // Let user adjust work delay time.
+            int autoWorkDelay;
+            while (true) {
+                System.out.print(
+                        "How long would you like to work everytime? (min.)\n" +
+                        "[Default: 60 min.] : ");
+                input = scanner.nextLine();
+                if (input.equals("")) {
+                    autoWorkDelay = AutoRobot.ONE_HOUR_DELAY;
+                }
+                else {
+                    try {
+                        int tmp = Integer.parseInt(input) * 1000 + 1000;
+                        if (tmp < 60) {
+                            System.out.println("The delay time must at least 60 min.\n");
+                            continue;
+                        }
+                        autoWorkDelay = tmp;
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println("Please enter a valid number\n");
+                        continue;
+                    }
+                }
+                break;
+            }
+
+
+
             System.out.print("Robot start offset in second (default: 10 sec.) = ");
-            String input = scanner.nextLine();
             long startTimeOffset;
             if (input.equals(""))
                 startTimeOffset = 10;

@@ -8,7 +8,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AutoRobot {
-    public static final int DEFAULT_OPERATION_DELAY = 200;
+    public static final int WORK_ONLY = 1;
+    public static final int WORK_AND_DAILY = 2;
+    public static final int WORK_DAILY_GAMBLE = 3;
+
+    public static final int DEFAULT_OPERATION_DELAY = 100;
     public static final int ONE_DAY_DELAY = 3600000 * 24;
     public static final int ONE_HOUR_DELAY = 3610000;
     public static final int ONE_MINUTE_DELAY = 70000;
@@ -71,6 +75,24 @@ public class AutoRobot {
                     System.exit(1);
                 }
             }).start();
+
+            // Auto daily thread
+            new Thread(() -> {
+                try {
+                    Thread.sleep(500);
+                    while (true) {
+                        logger.info("Typing 'DAILY'...");
+                        typeDaily();
+                        logger.info("Type in 'DAILY' completed. Now waiting...");
+                        Thread.sleep(ONE_DAY_DELAY);
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    System.exit(1);
+                }
+            }).start();
+
             // Auto dice thread
             new Thread(() -> {
                 try {
@@ -79,21 +101,6 @@ public class AutoRobot {
                         typeDice(240);
                         logger.info("Type in 'DICE' completed. Now waiting...");
                         Thread.sleep(ONE_MINUTE_DELAY);
-                    }
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                    System.exit(1);
-                }
-            }).start();
-            // Auto daily thread
-            new Thread(() -> {
-                try {
-                    while (true) {
-                        logger.info("Typing 'DAILY'...");
-                        typeDaily();
-                        logger.info("Type in 'DAILY' completed. Now waiting...");
-                        Thread.sleep(ONE_DAY_DELAY);
                     }
                 }
                 catch (Exception e) {
