@@ -3,6 +3,7 @@ package priv.kcl.bugcatisland.autoworkrobot;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,9 +18,25 @@ public class AutoRobot {
     public static final int ONE_HOUR_DELAY = 3610000;
     public static final int ONE_MINUTE_DELAY = 70000;
 
+    public static final int DISABLE_GAMBLE = -1;
+    public static final int DICE_ONLY = 1;
+    public static final int RPS_ONLY = 2;
+    public static final int DICE_AND_RPS = 3;
+
+    public static final String RPS_STONE = "stone";
+    public static final String RPS_PAPER = "paper";
+    public static final String RPS_SCISSORS = "scissors";
+
+    public static final int DEFAULT_GAMBLE_AMOUNT = 240;
+    public static final int RANDOM_GAMBLE_AMOUNT = -1;
+
+    public static final int DEFAULT_GAMBLE_DELAY = 70000;
+
+    public static final long DEFAULT_DELAY_TIME = 2000;
+
     public static final String AUTO_WORK_ROBOT_START__INFO =
             "\n" +
-            ">>> ======================================================\n" +
+            ">>> =====================================\n" +
             "This robot is made for automatically work, gamble,\n" +
             "and receive daily reward. You may only use this\n" +
             "robot in Discord server: BUGCAT ISLAND, which\n" +
@@ -30,12 +47,12 @@ public class AutoRobot {
             "administrator, so be careful when you trying to use\n" +
             "this robot.\n" +
             "\n" +
-            "Author: __**KCL (KCL#7118)**__\n" +
+            "Author: __**KCL (<@353144875874648065>)**__\n" +
             "SHA256 License:\n" +
             "__**b95b7125c6d21a24e88b85d88ddd0853c5e3b4f108bae0e2bf91949971d9f760**__\n" +
             "Github:\n" +
-            "https://github.com/KCL-DreiKlite/BugcatIslandAutoWorkRobot\n" +
-            "======================================================";
+            "__**https://github.com/KCL-DreiKlite/BugcatIslandAutoWorkRobot**__\n" +
+            "=====================================";
 
     public static final String LOGGER_NAME = "AutoWorkRobotLog";
 
@@ -43,7 +60,29 @@ public class AutoRobot {
 
     private Logger logger;
 
-    public AutoRobot(long timeOffset) {
+    private final int autoMode;
+    private final long autoWorkDelay;
+    private final int openedGames;
+    private final int gambleAmount;
+    private final long gambleDelay;
+    private final long timeOffset;
+
+    private boolean isOccupiedTextField = false;
+
+    public AutoRobot(
+            int autoMode,
+            long autoWorkDelay,
+            int openedGames,
+            int gambleAmount,
+            long gambleDelay,
+            long timeOffset) {
+        this.autoMode = autoMode;
+        this.autoWorkDelay = autoWorkDelay;
+        this.openedGames = openedGames;
+        this.gambleAmount = gambleAmount;
+        this.gambleDelay = gambleDelay;
+        this.timeOffset = timeOffset;
+
         try {
             logger = Logger.getLogger(LOGGER_NAME);
 
@@ -57,15 +96,17 @@ public class AutoRobot {
 
             // Enter robot license first.
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            Transferable originalContent = clipboard.getContents(null);     // Make sure we won't affect the original content of system clipboard
             clipboard.setContents(new StringSelection(AUTO_WORK_ROBOT_START__INFO), null);
             inputCtrlV();
+            clipboard.setContents(originalContent, null);   // Give back the original clipboard content
 
             // Auto work thread
             new Thread(() -> {
                 try {
                     while (true) {
                         logger.info("Typing 'WORK'...");
-                        typeWork();
+                        typeWork(DEFAULT_DELAY_TIME);
                         logger.info("Type in 'WORK' completed. Now waiting...");
                         Thread.sleep(ONE_HOUR_DELAY);
                     }
@@ -82,7 +123,7 @@ public class AutoRobot {
                     Thread.sleep(500);
                     while (true) {
                         logger.info("Typing 'DAILY'...");
-                        typeDaily();
+                        typeDaily(DEFAULT_DELAY_TIME);
                         logger.info("Type in 'DAILY' completed. Now waiting...");
                         Thread.sleep(ONE_DAY_DELAY);
                     }
@@ -98,7 +139,7 @@ public class AutoRobot {
                 try {
                     while (true) {
                         logger.info("Typing 'DICE'...");
-                        typeDice(240);
+                        typeDice(240, 0);
                         logger.info("Type in 'DICE' completed. Now waiting...");
                         Thread.sleep(ONE_MINUTE_DELAY);
                     }
@@ -109,6 +150,8 @@ public class AutoRobot {
                 }
             }).start();
 
+            // Auto rps thread
+
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -116,31 +159,48 @@ public class AutoRobot {
         }
     }
 
-    private void typeWork() {
+    private void typeWork(long timeOffset) throws InterruptedException {
         if (robot == null) {
             System.err.println("Error! Robot is not declared!");
             return;
         }
 
-        inputString("/work");
+        inputString("/work\t\n");
+
+        Thread.sleep(timeOffset);
     }
 
-    private void typeDice(int coins) {
+    private void typeRps(int coins, long timeOffset) throws InterruptedException {
         if (robot == null) {
             System.err.println("Error! Robot is not declared!");
             return;
         }
 
-        inputString("/dice " + coins);
+        String sign = RPS_STONE;
+
+
     }
 
-    private void typeDaily() {
+    private void typeDice(int coins, long timeOffset) throws InterruptedException {
         if (robot == null) {
             System.err.println("Error! Robot is not declared!");
             return;
         }
 
-        inputString("/daily");
+        inputString("/dice " + coins + "\t\n");
+
+        Thread.sleep(timeOffset);
+    }
+
+    private void typeDaily(long timeOffset) throws InterruptedException {
+        if (robot == null) {
+            System.err.println("Error! Robot is not declared!");
+            return;
+        }
+
+        inputString("/daily\t\n");
+
+        Thread.sleep(timeOffset);
     }
 
     private synchronized void inputString(String input) {
@@ -153,8 +213,6 @@ public class AutoRobot {
 
         for (char c : input.toCharArray())
             inputCharacter(c);
-        inputCharacter('\t');
-        inputCharacter('\n');
     }
 
     private synchronized void inputCharacter(char character) {
@@ -179,5 +237,9 @@ public class AutoRobot {
         robot.keyRelease(KeyEvent.VK_V);
 
         inputCharacter('\n');
+    }
+
+    private synchronized void occupiyTextfield(long delay) {
+
     }
 }
