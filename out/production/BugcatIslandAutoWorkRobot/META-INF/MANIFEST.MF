@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: priv.kcl.bugcatisland.autoworkrobot.Main
-
