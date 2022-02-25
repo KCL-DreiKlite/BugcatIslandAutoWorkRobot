@@ -1,5 +1,7 @@
 package priv.kcl.bugcatisland.autoworkrobot;
 
+import priv.kcl.bugcatisland.autoworkrobot.core.AutoRobot;
+
 import java.util.Scanner;
 import java.util.logging.*;
 
@@ -9,7 +11,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        try {
+//        try {
             // Define new console scanner.
             Scanner scanner = new Scanner(System.in);
 
@@ -20,8 +22,8 @@ public class Main {
 //            Logger logger = Logger.getLogger(AutoRobot.LOGGER_NAME);
 
             // Define some attributes.
-            int autoMode;
-            long autoWorkDelay;
+            int autoMode = AutoRobot.WORK_DAILY_GAMBLE;
+            long autoWorkDelay = AutoRobot.ONE_HOUR_DELAY;
             int openedGames = AutoRobot.DISABLE_GAMBLE;
             int gambleAmount = AutoRobot.DEFAULT_GAMBLE_AMOUNT;
             long gambleDelay = AutoRobot.DEFAULT_GAMBLE_DELAY;
@@ -211,9 +213,9 @@ public class Main {
             logger.info("You can stop program anytime by type in Ctrl + C or just simply close this window.");
 
             new AutoRobot(autoMode, autoWorkDelay, openedGames, gambleAmount, gambleDelay, startTimeOffset);
-        }
-        catch (NumberFormatException e) {
-            System.err.println("Please enter a valid number");
-        }
+//        }
+//        catch (NumberFormatException e) {
+//            System.err.println("Please enter a valid number");
+//        }
     }
 }

@@ -1,4 +1,4 @@
-package priv.kcl.bugcatisland.autoworkrobot;
+package priv.kcl.bugcatisland.autoworkrobot.core;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -13,10 +13,11 @@ public class AutoRobot {
     public static final int WORK_AND_DAILY = 2;
     public static final int WORK_DAILY_GAMBLE = 3;
 
-    public static final int DEFAULT_OPERATION_DELAY = 100;
-    public static final int ONE_DAY_DELAY = 3600000 * 24;
-    public static final int ONE_HOUR_DELAY = 3610000;
-    public static final int ONE_MINUTE_DELAY = 70000;
+    public static final long DEFAULT_OPERATION_DELAY = 100;
+    public static final long ONE_DAY_DELAY = 3600000 * 24;
+    public static final long ONE_HOUR_DELAY = 3600000;
+    public static final long ONE_MINUTE_DELAY = 60000;
+    public static final long ONE_SECOND_DELAY = 1000;
 
     public static final int DISABLE_GAMBLE = -1;
     public static final int DICE_ONLY = 1;
@@ -34,7 +35,7 @@ public class AutoRobot {
 
     public static final long DEFAULT_DELAY_TIME = 2000;
 
-    public static final String AUTO_WORK_ROBOT_START__INFO =
+    public static final String AUTO_WORK_ROBOT_START_INFO =
             "\n" +
             ">>> =====================================\n" +
             "This robot is made for automatically work, gamble,\n" +
@@ -55,6 +56,10 @@ public class AutoRobot {
             "=====================================";
 
     public static final String LOGGER_NAME = "AutoWorkRobotLog";
+
+    public static Logger getDefaultLogger() {
+        return Logger.getLogger(LOGGER_NAME);
+    }
 
     private Robot robot;
 
@@ -88,8 +93,7 @@ public class AutoRobot {
 
             // Define a new robot.
             robot = new Robot();
-            robot.setAutoDelay(DEFAULT_OPERATION_DELAY);
-
+            robot.setAutoDelay((int)DEFAULT_OPERATION_DELAY);
             Thread.sleep(timeOffset);
 
             logger.log(Level.INFO, "Robot started...");
@@ -97,7 +101,7 @@ public class AutoRobot {
             // Enter robot license first.
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable originalContent = clipboard.getContents(null);     // Make sure we won't affect the original content of system clipboard
-            clipboard.setContents(new StringSelection(AUTO_WORK_ROBOT_START__INFO), null);
+            clipboard.setContents(new StringSelection(AUTO_WORK_ROBOT_START_INFO), null);
             inputCtrlV();
             clipboard.setContents(originalContent, null);   // Give back the original clipboard content
 
@@ -165,7 +169,7 @@ public class AutoRobot {
             return;
         }
 
-        inputString("/work\t\n");
+//        inputString("/work\t\n");
 
         Thread.sleep(timeOffset);
     }
@@ -187,7 +191,7 @@ public class AutoRobot {
             return;
         }
 
-        inputString("/dice " + coins + "\t\n");
+//        inputString("/dice " + coins + "\t\n");
 
         Thread.sleep(timeOffset);
     }
@@ -198,32 +202,32 @@ public class AutoRobot {
             return;
         }
 
-        inputString("/daily\t\n");
+//        inputString("/daily\t\n");
 
         Thread.sleep(timeOffset);
     }
 
-    private synchronized void inputString(String input) {
-        if (robot == null) {
-            System.err.println("Error! Robot is not declared!");
-            return;
-        }
-
-        input = input.toUpperCase();
-
-        for (char c : input.toCharArray())
-            inputCharacter(c);
-    }
-
-    private synchronized void inputCharacter(char character) {
-        if (robot == null) {
-            System.err.println("Error! Robot is not declared!");
-            return;
-        }
-
-        robot.keyPress(character);
-        robot.keyRelease(character);
-    }
+//    private synchronized void inputString(String input) {
+//        if (robot == null) {
+//            System.err.println("Error! Robot is not declared!");
+//            return;
+//        }
+//
+//        input = input.toUpperCase();
+//
+//        for (char c : input.toCharArray())
+//            inputCharacter(c);
+//    }
+//
+//    private synchronized void inputCharacter(char character) {
+//        if (robot == null) {
+//            System.err.println("Error! Robot is not declared!");
+//            return;
+//        }
+//
+//        robot.keyPress(character);
+//        robot.keyRelease(character);
+//    }
 
     private synchronized void inputCtrlV() {
         if (robot == null) {
@@ -236,10 +240,10 @@ public class AutoRobot {
         robot.keyRelease(KeyEvent.VK_CONTROL);
         robot.keyRelease(KeyEvent.VK_V);
 
-        inputCharacter('\n');
+//        inputCharacter('\n');
     }
 
-    private synchronized void occupiyTextfield(long delay) {
-
+    private synchronized void occupiyTextfield(long delay) throws InterruptedException {
+        Thread.sleep(500);
     }
 }
