@@ -10,8 +10,6 @@ public abstract class AutoRobot implements Runnable {
     protected long startDelay;
     protected long interval;
 
-    protected String robotStartDelayLogInfo;
-    protected String robotIntervalLogInfo;
     protected String interruptedExceptionLogInfo;
 
     protected Thread robotThread;
@@ -34,9 +32,7 @@ public abstract class AutoRobot implements Runnable {
         this.interval = interval;
     }
 
-    protected void setupLogInfo(String robotStartDelayLogInfo, String robotIntervalLogInfo, String interruptedExceptionLogInfo) {
-        this.robotStartDelayLogInfo = robotStartDelayLogInfo;
-        this.robotIntervalLogInfo = robotIntervalLogInfo;
+    protected void setupErrorLogInfo(String interruptedExceptionLogInfo) {
         this.interruptedExceptionLogInfo = interruptedExceptionLogInfo;
     }
 
@@ -67,9 +63,6 @@ public abstract class AutoRobot implements Runnable {
     public void run() {
         try {
             while (!stopThread) {
-//            log(robotStartDelayLogInfo, startDelay);
-//            Thread.sleep(startDelay);
-//
                 executeJob();
             }
         }

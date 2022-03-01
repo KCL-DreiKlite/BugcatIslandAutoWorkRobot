@@ -13,21 +13,11 @@ public class DailyReceiver extends AutoRobot {
 
     public static final String TYPE_RECEIVE_TEXT = "/daily\t\n";
     public static final String INTERRUPTED_EXCEPTION_ERROR_MESSAGE = "Oops! Something goes wrong while typing 'DAILY'!";
-//    private Robot robot;
-//
-//    private long receiverStartDelay;
-//    private long receiverInterval;
-//
-//    private Thread receiverThread;
-//
-//    private Model.LogPrinter logPrinter;
-//
-//    private boolean keepThreadRunning;
 
     public DailyReceiver(Typer typer) {
         super(typer, RECEIVER_THREAD_NAME);
 
-        setupLogInfo(TYPE_RECEIVE_START_DELAY_LOG_INFO, TYPE_RECEIVE_INTERVAL_LOG_INFO, INTERRUPTED_EXCEPTION_ERROR_MESSAGE);
+        setupErrorLogInfo(INTERRUPTED_EXCEPTION_ERROR_MESSAGE);
     }
 
     private void receiveDailyReward() throws InterruptedException {
@@ -47,44 +37,4 @@ public class DailyReceiver extends AutoRobot {
         receiveDailyReward();
     }
 
-    //    public DailyReceiver(Robot robot, long receiverStartDelay, long receiverInterval) {
-//        this.robot = robot;
-//        this.receiverStartDelay = receiverStartDelay;
-//        this.receiverInterval = receiverInterval;
-//    }
-//
-//    private void initReceiverThread() {
-//        receiverThread = new Thread(this);
-//        receiverThread.setName(RECEIVER_THREAD_NAME);
-//
-//        setKeepThreadRunning(true);
-//    }
-//
-//    public void startReceiver() {
-//
-//    }
-//
-//    public void stopReceiver() {
-//
-//    }
-//
-//    private void log(String message, Object ... parameters) {
-//        if (logPrinter == null)
-//            return;
-//
-//        logPrinter.log(message, parameters);
-//    }
-//
-//    public void setLogPrinter(Model.LogPrinter logPrinter) {
-//        this.logPrinter = logPrinter;
-//    }
-
-//    public synchronized void setKeepThreadRunning(boolean keepThreadRunning) {
-//        this.keepThreadRunning = keepThreadRunning;
-//    }
-//
-//    @Override
-//    public void run() {
-//
-//    }
 }

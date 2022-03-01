@@ -370,21 +370,6 @@ public class Viewer extends JFrame {
         gbc.weightx = 0.6;  gbc.weighty = 1;
         gbc.insets = new Insets(2, 1, 2, 2);
         subRootPanel.add(logMessageLayer, gbc);
-//        gbc.gridx = 0;      gbc.gridy = 0;
-//        gbc.gridwidth = 1;  gbc.gridheight = 1;
-//        gbc.weightx = 0.25; gbc.weighty = 0.4;
-//        gbc.insets = new Insets(0, 3, 1, 3);
-//        gbc.fill = GridBagConstraints.BOTH;
-//        subRootPanel.add(workerLayer, gbc);
-//        gbc.gridx = 1;      gbc.gridy = 0;
-//        subRootPanel.add(receiverLayer, gbc);
-//        gbc.gridx = 2;      gbc.gridy = 0;
-//        gbc.weightx = 0.5;  gbc.weighty = 0.4;
-//        subRootPanel.add(gamblerLayer, gbc);
-//        gbc.gridx = 0;      gbc.gridy = 1;
-//        gbc.gridwidth = 3;  gbc.gridheight = 1;
-//        gbc.weightx = 1.0;  gbc.weighty = 0.6;
-//        subRootPanel.add(logMessageLayer, gbc);
 
         // =========== rootPanel ===========
         JPanel rootPanel = new JPanel();
@@ -619,19 +604,5 @@ public class Viewer extends JFrame {
     public void setCommitsOnValidEditAsTrue(JSpinner spinner) {
         JFormattedTextField formattedTextField = ((JSpinner.DefaultEditor)spinner.getEditor()).getTextField();
         ((DefaultFormatter) formattedTextField.getFormatter()).setCommitsOnValidEdit(true);
-    }
-
-    public static void main(String[] args) {
-        try {
-            Robot robot = new Robot();
-            robot.setAutoDelay(200);
-            Typer typer = new Typer(robot);
-
-            new Viewer(new ViewModel(new Model(typer)));
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-//        new ViewerBeta();
     }
 }

@@ -19,6 +19,8 @@ public class GamblerDICE extends AutoRobot {
 
     public GamblerDICE(Typer typer) {
         super(typer, GAMBLE_DICE_THREAD_NAME);
+
+        setupErrorLogInfo(INTERRUPTED_EXCEPTION_ERROR_MESSAGE);
     }
 
     public void setupAttributes(long startDelay, long interval, int gambleCash) {

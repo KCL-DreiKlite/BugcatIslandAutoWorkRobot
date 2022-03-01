@@ -21,7 +21,6 @@ public class GamblerRPS extends AutoRobot {
     private static final String TYPE_PAPER_TEXT = "paper";
     private static final String TYPE_SCISSORS_TEXT = "scissors";
 
-
     private static final String INTERRUPTED_EXCEPTION_ERROR_MESSAGE = "Oops! Something goes wrong while typing 'RPS'!";
 
     private int gambleCash;
@@ -29,6 +28,8 @@ public class GamblerRPS extends AutoRobot {
 
     public GamblerRPS(Typer typer) {
         super(typer, GAMBLE_RPS_THREAD_NAME);
+
+        setupErrorLogInfo(INTERRUPTED_EXCEPTION_ERROR_MESSAGE);
     }
 
     public void setupAttributes(long startDelay, long interval, int gambleCash, int rpsWhichHand) {
