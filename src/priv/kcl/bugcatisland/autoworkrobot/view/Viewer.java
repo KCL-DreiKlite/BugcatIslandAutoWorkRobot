@@ -1,5 +1,7 @@
 package priv.kcl.bugcatisland.autoworkrobot.view;
 
+import priv.kcl.bugcatisland.autoworkrobot.core.Typer;
+
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.DefaultFormatter;
@@ -30,7 +32,7 @@ public class Viewer extends JFrame {
     private JSpinner spinnerRPSGambleCash;
     private JRadioButton radiobuttonRPSRock;
     private JRadioButton radiobuttonRPSPaper;
-    private JRadioButton radiobuttonRPSScissor;
+    private JRadioButton radiobuttonRPSScissors;
     private JRadioButton radiobuttonRPSRandom;
     private ButtonGroup buttongroupRPSSelection;
 
@@ -146,9 +148,9 @@ public class Viewer extends JFrame {
         radiobuttonRPSPaper.setText("Paper");
         radiobuttonRPSPaper.setEnabled(false);
         // =========== radiobuttonRPSScissor ===========
-        radiobuttonRPSScissor = new JRadioButton();
-        radiobuttonRPSScissor.setText("Scissor");
-        radiobuttonRPSScissor.setEnabled(false);
+        radiobuttonRPSScissors = new JRadioButton();
+        radiobuttonRPSScissors.setText("Scissors");
+        radiobuttonRPSScissors.setEnabled(false);
         // =========== radiobuttonRPSRandom ===========
         radiobuttonRPSRandom = new JRadioButton();
         radiobuttonRPSRandom.setText("Random");
@@ -157,7 +159,7 @@ public class Viewer extends JFrame {
         buttongroupRPSSelection = new ButtonGroup();
         buttongroupRPSSelection.add(radiobuttonRPSRock);
         buttongroupRPSSelection.add(radiobuttonRPSPaper);
-        buttongroupRPSSelection.add(radiobuttonRPSScissor);
+        buttongroupRPSSelection.add(radiobuttonRPSScissors);
         buttongroupRPSSelection.add(radiobuttonRPSRandom);
 
         // =========== checkboxEnableDICE ===========
@@ -263,7 +265,7 @@ public class Viewer extends JFrame {
         gambleRPSSelectionPanel.setLayout(new GridLayout(2, 2));
         gambleRPSSelectionPanel.add(radiobuttonRPSRock);
         gambleRPSSelectionPanel.add(radiobuttonRPSPaper);
-        gambleRPSSelectionPanel.add(radiobuttonRPSScissor);
+        gambleRPSSelectionPanel.add(radiobuttonRPSScissors);
         gambleRPSSelectionPanel.add(radiobuttonRPSRandom);
         JPanel gambleRPSLayer = new JPanel();
         gambleRPSLayer.setLayout(new GridBagLayout());
@@ -408,7 +410,7 @@ public class Viewer extends JFrame {
         spinnerRPSGambleCash.addChangeListener(viewModel::spinnerRPSGambleAmount_ChangeListener);
         radiobuttonRPSRock.addChangeListener(viewModel::radiobuttonRPSRock_ChangeListener);
         radiobuttonRPSPaper.addChangeListener(viewModel::radiobuttonRPSPaper_ChangeListener);
-        radiobuttonRPSScissor.addChangeListener(viewModel::radiobuttonRPSScissor_ChangeListener);
+        radiobuttonRPSScissors.addChangeListener(viewModel::radiobuttonRPSScissor_ChangeListener);
         radiobuttonRPSRandom.addChangeListener(viewModel::radiobuttonRPSRandom_ChangeListener);
 
         checkboxEnableDICE.addItemListener(viewModel::checkboxEnableDICE_ItemListener);
@@ -454,8 +456,8 @@ public class Viewer extends JFrame {
         viewModel.putViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_ROCK_ENABLED, radiobuttonRPSRock.isEnabled());
         viewModel.putViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_PAPER_SELECTED, radiobuttonRPSPaper.isSelected());
         viewModel.putViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_PAPER_ENABLED, radiobuttonRPSPaper.isEnabled());
-        viewModel.putViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_SCISSOR_SELECTED, radiobuttonRPSScissor.isSelected());
-        viewModel.putViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_SCISSOR_ENABLED, radiobuttonRPSScissor.isEnabled());
+        viewModel.putViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_SCISSOR_SELECTED, radiobuttonRPSScissors.isSelected());
+        viewModel.putViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_SCISSOR_ENABLED, radiobuttonRPSScissors.isEnabled());
         viewModel.putViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_RANDOM_SELECTED, radiobuttonRPSRandom.isSelected());
         viewModel.putViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_RANDOM_ENABLED, radiobuttonRPSRandom.isEnabled());
 
@@ -527,7 +529,7 @@ public class Viewer extends JFrame {
                 radiobuttonRPSPaper.setEnabled((boolean) updatedAttributes);
                 break;
             case ViewModel.RADIO_BUTTON_RPS_SCISSOR_ENABLED:
-                radiobuttonRPSScissor.setEnabled((boolean) updatedAttributes);
+                radiobuttonRPSScissors.setEnabled((boolean) updatedAttributes);
                 break;
             case ViewModel.RADIO_BUTTON_RPS_RANDOM_ENABLED:
                 radiobuttonRPSRandom.setEnabled((boolean) updatedAttributes);
@@ -587,7 +589,7 @@ public class Viewer extends JFrame {
         spinnerRPSGambleCash.setEnabled((boolean) viewModel.getViewComponentAttribute(ViewModel.SPINNER_RPS_GAMBLE_CASH_ENABLED));
         radiobuttonRPSRock.setEnabled((boolean) viewModel.getViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_ROCK_ENABLED));
         radiobuttonRPSPaper.setEnabled((boolean) viewModel.getViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_PAPER_ENABLED));
-        radiobuttonRPSScissor.setEnabled((boolean) viewModel.getViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_SCISSOR_ENABLED));
+        radiobuttonRPSScissors.setEnabled((boolean) viewModel.getViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_SCISSOR_ENABLED));
         radiobuttonRPSRandom.setEnabled((boolean) viewModel.getViewComponentAttribute(ViewModel.RADIO_BUTTON_RPS_RANDOM_ENABLED));
 
 //        checkboxEnableDICE.setSelected((boolean) viewModel.getViewComponentAttribute(ViewModel.CHECKBOX_ENABLE_DICE_SELECTED));
@@ -623,7 +625,9 @@ public class Viewer extends JFrame {
         try {
             Robot robot = new Robot();
             robot.setAutoDelay(200);
-            new Viewer(new ViewModel(new Model(robot)));
+            Typer typer = new Typer(robot);
+
+            new Viewer(new ViewModel(new Model(typer)));
         }
         catch (Exception e) {
             e.printStackTrace();

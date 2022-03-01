@@ -2,33 +2,40 @@ package priv.kcl.bugcatisland.autoworkrobot.view;
 
 import priv.kcl.bugcatisland.autoworkrobot.core.*;
 
-import java.awt.*;
-
 public class Model {
-
-    public static final int RPS_ROCK = 0;
-    public static final int RPS_PAPER = 1;
-    public static final int RPS_SCISSOR = 2;
-    public static final int RPS_RANDOM = 3;
 
     private LogPrinter logPrinter;
 
-    private Robot robot;
+    private Typer typer;
 
     private Worker worker;
     private DailyReceiver dailyReceiver;
-    private Gambler gambler;
     private GamblerRPS gamblerRPS;
     private GamblerDICE gamblerDICE;
 
-    public Model(Robot robot) {
-        this.robot = robot;
+    private boolean isEnableReceiver;
+    private boolean isEnableRPS;
+    private boolean isEnableDICE;
 
-        worker = new Worker(robot);
+    public Model(Typer typer) {
+        this.typer = typer;
+
+        initAllRobots();
+    }
+
+    private void initAllRobots() {
+        worker = new Worker(typer);
+        dailyReceiver = new DailyReceiver(typer);
+        gamblerRPS = new GamblerRPS(typer);
+        gamblerDICE = new GamblerDICE(typer);
     }
 
     private void initAllLogPrinter() {
+        typer.setLogPrinter(this.logPrinter);
         worker.setLogPrinter(this.logPrinter);
+        dailyReceiver.setLogPrinter(this.logPrinter);
+        gamblerRPS.setLogPrinter(this.logPrinter);
+        gamblerDICE.setLogPrinter(this.logPrinter);
     }
 
     public void setupRobotAttributes(int workerStartDelay,
@@ -45,18 +52,35 @@ public class Model {
                                      int gambleDICEStartDelay,
                                      int gambleDICEInterval,
                                      int gambleDICEGambleCash) {
-        worker.setupAttributes(workerStartDelay * 1000L, workerInterval * 1000L);
+        this.isEnableReceiver = enableReceiver;
+        this.isEnableRPS = enableRPS;
+        this.isEnableDICE = enableDICE;
+
+        worker.setupAttributes(workerStartDelay * 1000L, workerInterval * 1000L * 60);
+        dailyReceiver.setupAttributes(receiverStartDelay * 1000L, receiverInterval * 1000L * 60 * 60 * 24);
+        gamblerRPS.setupAttributes(gambleRPSStartDelay * 1000L, gambleRPSInterval * 1000L, gambleRPSGambleCash, gambleRPSWhichHand);
+        gamblerDICE.setupAttributes(gambleDICEStartDelay * 1000L, gambleDICEInterval * 1000L, gambleDICEGambleCash);
     }
 
     public void startRobot() {
-        worker.startWorking();
+        typer.turnOnTyper();
+
+        worker.startRobot();
+        if (isEnableReceiver) dailyReceiver.startRobot();
+        if (isEnableRPS) gamblerRPS.startRobot();
+        if (isEnableDICE) gamblerDICE.startRobot();
     }
 
     public void stopRobot() {
-        worker.stopWorking();
+        typer.turnOffTyper();
+
+        worker.stopRobot();
+        dailyReceiver.stopRobot();
+        gamblerRPS.stopRobot();
+        gamblerDICE.stopRobot();
     }
 
-    private void log(String message, Object ... parameters) {
+    private synchronized void log(String message, Object ... parameters) {
         if (logPrinter == null)
             return;
 

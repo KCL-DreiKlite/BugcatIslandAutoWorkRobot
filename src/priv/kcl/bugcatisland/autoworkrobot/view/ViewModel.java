@@ -1,5 +1,7 @@
 package priv.kcl.bugcatisland.autoworkrobot.view;
 
+import priv.kcl.bugcatisland.autoworkrobot.core.GamblerRPS;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.ActionEvent;
@@ -54,34 +56,34 @@ public class ViewModel {
     public static final String BUTTON_STOP_ROBOT_ENABLED = "buttonStopRobot_" + ENABLED_ATTRIBUTE_NAME;
 
     public static final int SPINNER_WORK_START_DELAY_UPPER_LIMIT = 86400;
-    public static final int SPINNER_WORK_START_DELAY_DEFAULT_VALUE = 10;
+    public static final int SPINNER_WORK_START_DELAY_DEFAULT_VALUE = 5;
     public static final int SPINNER_WORK_START_DELAY_LOWER_LIMIT = 3;
     public static final int SPINNER_WORK_INTERVAL_UPPER_LIMIT = 1440;
     public static final int SPINNER_WORK_INTERVAL_DEFAULT_VALUE = 61;
     public static final int SPINNER_WORK_INTERVAL_LOWER_LIMIT = 60;
 
     public static final int SPINNER_RECEIVER_START_DELAY_UPPER_LIMIT = 86400;
-    public static final int SPINNER_RECEIVER_START_DELAY_DEFAULT_VALUE = 10;
+    public static final int SPINNER_RECEIVER_START_DELAY_DEFAULT_VALUE = 5;
     public static final int SPINNER_RECEIVER_START_DELAY_LOWER_LIMIT = 3;
     public static final int SPINNER_RECEIVER_INTERVAL_UPPER_LIMIT = 2000;
     public static final int SPINNER_RECEIVER_INTERVAL_DEFAULT_VALUE = 1445;
     public static final int SPINNER_RECEIVER_INTERVAL_LOWER_LIMIT = 1440;
 
     public static final int SPINNER_RPS_START_DELAY_UPPER_LIMIT = 86400;
-    public static final int SPINNER_RPS_START_DELAY_DEFAULT_VALUE = 10;
+    public static final int SPINNER_RPS_START_DELAY_DEFAULT_VALUE = 5;
     public static final int SPINNER_RPS_START_DELAY_LOWER_LIMIT = 3;
     public static final int SPINNER_RPS_INTERVAL_UPPER_LIMIT = 86400;
-    public static final int SPINNER_RPS_INTERVAL_DEFAULT_VALUE = 70;
+    public static final int SPINNER_RPS_INTERVAL_DEFAULT_VALUE = 65;
     public static final int SPINNER_RPS_INTERVAL_LOWER_LIMIT = 60;
     public static final int SPINNER_RPS_GAMBLE_CASH_UPPER_LIMIT = 240;
     public static final int SPINNER_RPS_GAMBLE_CASH_DEFAULT_VALUE = 240;
     public static final int SPINNER_RPS_GAMBLE_CASH_LOWER_LIMIT = 1;
 
     public static final int SPINNER_DICE_START_DELAY_UPPER_LIMIT = 86400;
-    public static final int SPINNER_DICE_START_DELAY_DEFAULT_VALUE = 10;
+    public static final int SPINNER_DICE_START_DELAY_DEFAULT_VALUE = 5;
     public static final int SPINNER_DICE_START_DELAY_LOWER_LIMIT = 3;
     public static final int SPINNER_DICE_INTERVAL_UPPER_LIMIT = 86400;
-    public static final int SPINNER_DICE_INTERVAL_DEFAULT_VALUE = 70;
+    public static final int SPINNER_DICE_INTERVAL_DEFAULT_VALUE = 65;
     public static final int SPINNER_DICE_INTERVAL_LOWER_LIMIT = 60;
     public static final int SPINNER_DICE_GAMBLE_CASH_UPPER_LIMIT = 240;
     public static final int SPINNER_DICE_GAMBLE_CASH_DEFAULT_VALUE = 240;
@@ -117,13 +119,13 @@ public class ViewModel {
         int gambleRPSGambleCash = (int) viewComponentsAttributes.get(SPINNER_RPS_GAMBLE_CASH_VALUE);
         int gambleRPSWhichHand;
         if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_ROCK_SELECTED))
-            gambleRPSWhichHand = Model.RPS_ROCK;
+            gambleRPSWhichHand = GamblerRPS.RPS_ROCK;
         else if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_PAPER_SELECTED))
-            gambleRPSWhichHand = Model.RPS_PAPER;
+            gambleRPSWhichHand = GamblerRPS.RPS_PAPER;
         else if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_SCISSOR_SELECTED))
-            gambleRPSWhichHand = Model.RPS_SCISSOR;
+            gambleRPSWhichHand = GamblerRPS.RPS_SCISSORS;
         else
-            gambleRPSWhichHand = Model.RPS_RANDOM;
+            gambleRPSWhichHand = GamblerRPS.RPS_RANDOM;
         boolean enableDICE = (boolean) viewComponentsAttributes.get(CHECKBOX_ENABLE_DICE_SELECTED);
         int gambleDICEStartDelay = (int) viewComponentsAttributes.get(SPINNER_DICE_START_DELAY_VALUE);
         int gambleDICEInterval = (int) viewComponentsAttributes.get(SPINNER_DICE_INTERVAL_VALUE);
@@ -159,7 +161,7 @@ public class ViewModel {
             spinner.setValue(lowerLimit);
     }
 
-    private void log(String message, Object ... parameters) {
+    private synchronized void log(String message, Object ... parameters) {
         final String DATE_FORMAT = "[MM/dd HH:mm:ss]";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMAT);
 
@@ -190,13 +192,13 @@ public class ViewModel {
         int gambleRPSGambleCash = (int) viewComponentsAttributes.get(SPINNER_RPS_GAMBLE_CASH_VALUE);
         int gambleRPSWhichHand;
         if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_ROCK_SELECTED))
-            gambleRPSWhichHand = Model.RPS_ROCK;
+            gambleRPSWhichHand = GamblerRPS.RPS_ROCK;
         else if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_PAPER_SELECTED))
-            gambleRPSWhichHand = Model.RPS_PAPER;
+            gambleRPSWhichHand = GamblerRPS.RPS_PAPER;
         else if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_SCISSOR_SELECTED))
-            gambleRPSWhichHand = Model.RPS_SCISSOR;
+            gambleRPSWhichHand = GamblerRPS.RPS_SCISSORS;
         else
-            gambleRPSWhichHand = Model.RPS_RANDOM;
+            gambleRPSWhichHand = GamblerRPS.RPS_RANDOM;
         boolean enableDICE = (boolean) viewComponentsAttributes.get(CHECKBOX_ENABLE_DICE_SELECTED);
         int gambleDICEStartDelay = (int) viewComponentsAttributes.get(SPINNER_DICE_START_DELAY_VALUE);
         int gambleDICEInterval = (int) viewComponentsAttributes.get(SPINNER_DICE_INTERVAL_VALUE);
@@ -213,7 +215,7 @@ public class ViewModel {
         }
         stringBuilder.append("enableRPS =\t\t").append(enableRPS).append("\n");
         if (enableRPS) {
-            stringBuilder.append("rpsStartDelay =\t").append(gambleRPSStartDelay).append("\n");
+            stringBuilder.append("rpsStartDelay =\t\t").append(gambleRPSStartDelay).append("\n");
             stringBuilder.append("rpsInterval =\t\t").append(gambleRPSInterval).append("\n");
             stringBuilder.append("rpsCash =\t\t").append(gambleRPSGambleCash).append("\n");
             stringBuilder.append("rpsHand =\t\t").append(gambleRPSWhichHand).append("\n");
