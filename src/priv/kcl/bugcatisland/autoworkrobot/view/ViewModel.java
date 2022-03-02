@@ -37,7 +37,7 @@ public class ViewModel {
     public static final String RADIO_BUTTON_RPS_PAPER_ENABLED = "radiobuttonRPSPaper_" + ENABLED_ATTRIBUTE_NAME;
     public static final String RADIO_BUTTON_RPS_PAPER_SELECTED = "radiobuttonRPSPaper_" + SELECTED_ATTRIBUTE_NAME;
     public static final String RADIO_BUTTON_RPS_SCISSOR_ENABLED = "radiobuttonRPSScissor_" + ENABLED_ATTRIBUTE_NAME;
-    public static final String RADIO_BUTTON_RPS_SCISSOR_SELECTED = "radiobuttonRPSScissor_" + SELECTED_ATTRIBUTE_NAME;
+    public static final String RADIO_BUTTON_RPS_SCISSORS_SELECTED = "radiobuttonRPSScissor_" + SELECTED_ATTRIBUTE_NAME;
     public static final String RADIO_BUTTON_RPS_RANDOM_ENABLED = "radiobuttonRPSRandom_" + ENABLED_ATTRIBUTE_NAME;
     public static final String RADIO_BUTTON_RPS_RANDOM_SELECTED = "radiobuttonRPSRandom_" + SELECTED_ATTRIBUTE_NAME;
     public static final String BUTTON_GROUP_RPS_SELECTED = "buttongroupRPS_" + SELECTED_ATTRIBUTE_NAME;
@@ -122,7 +122,7 @@ public class ViewModel {
             gambleRPSWhichHand = GamblerRPS.RPS_ROCK;
         else if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_PAPER_SELECTED))
             gambleRPSWhichHand = GamblerRPS.RPS_PAPER;
-        else if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_SCISSOR_SELECTED))
+        else if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_SCISSORS_SELECTED))
             gambleRPSWhichHand = GamblerRPS.RPS_SCISSORS;
         else
             gambleRPSWhichHand = GamblerRPS.RPS_RANDOM;
@@ -195,7 +195,7 @@ public class ViewModel {
             gambleRPSWhichHand = GamblerRPS.RPS_ROCK;
         else if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_PAPER_SELECTED))
             gambleRPSWhichHand = GamblerRPS.RPS_PAPER;
-        else if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_SCISSOR_SELECTED))
+        else if ((boolean) viewComponentsAttributes.get(RADIO_BUTTON_RPS_SCISSORS_SELECTED))
             gambleRPSWhichHand = GamblerRPS.RPS_SCISSORS;
         else
             gambleRPSWhichHand = GamblerRPS.RPS_RANDOM;
@@ -306,28 +306,40 @@ public class ViewModel {
         viewComponentsAttributes.put(SPINNER_RPS_GAMBLE_CASH_VALUE, spinnerRPSGambleAmount.getValue());
     }
     public void radiobuttonRPSRock_ChangeListener(ChangeEvent e) {
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_ROCK_SELECTED, true);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_PAPER_SELECTED, false);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_SCISSOR_SELECTED, false);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_RANDOM_SELECTED, false);
+        JRadioButton radiobuttonRPSRock = (JRadioButton) e.getSource();
+        if (radiobuttonRPSRock.isSelected()) {
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_ROCK_SELECTED, true);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_PAPER_SELECTED, false);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_SCISSORS_SELECTED, false);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_RANDOM_SELECTED, false);
+        }
     }
     public void radiobuttonRPSPaper_ChangeListener(ChangeEvent e) {
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_ROCK_SELECTED, false);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_PAPER_SELECTED, true);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_SCISSOR_SELECTED, false);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_RANDOM_SELECTED, false);
+        JRadioButton radiobuttonRPSPaper = (JRadioButton) e.getSource();
+        if (radiobuttonRPSPaper.isSelected()) {
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_ROCK_SELECTED, false);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_PAPER_SELECTED, true);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_SCISSORS_SELECTED, false);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_RANDOM_SELECTED, false);
+        }
     }
-    public void radiobuttonRPSScissor_ChangeListener(ChangeEvent e) {
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_ROCK_SELECTED, false);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_PAPER_SELECTED, false);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_SCISSOR_SELECTED, true);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_RANDOM_SELECTED, false);
+    public void radiobuttonRPSScissors_ChangeListener(ChangeEvent e) {
+        JRadioButton radiobuttonRPSScissors = (JRadioButton) e.getSource();
+        if (radiobuttonRPSScissors.isSelected()) {
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_ROCK_SELECTED, false);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_PAPER_SELECTED, false);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_SCISSORS_SELECTED, true);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_RANDOM_SELECTED, false);
+        }
     }
     public void radiobuttonRPSRandom_ChangeListener(ChangeEvent e) {
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_ROCK_SELECTED, false);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_PAPER_SELECTED, false);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_SCISSOR_SELECTED, false);
-        viewComponentsAttributes.put(RADIO_BUTTON_RPS_RANDOM_SELECTED, true);
+        JRadioButton radiobuttonRPSRandom = (JRadioButton) e.getSource();
+        if (radiobuttonRPSRandom.isSelected()) {
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_ROCK_SELECTED, false);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_PAPER_SELECTED, false);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_SCISSORS_SELECTED, false);
+            viewComponentsAttributes.put(RADIO_BUTTON_RPS_RANDOM_SELECTED, true);
+        }
     }
     public void checkboxEnableDICE_ItemListener(ItemEvent e) {
         JCheckBox checkboxEnableDICE = (JCheckBox) e.getSource();

@@ -3,6 +3,7 @@ package priv.kcl.bugcatisland.autoworkrobot.core;
 import priv.kcl.bugcatisland.autoworkrobot.view.Model;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 
 public class Typer {
@@ -59,6 +60,8 @@ public class Typer {
         if (isDebugMode) log(TYPE_CHARACTER_TYPING_LOG_INFO, character);
         robot.keyPress(character);
         robot.keyRelease(character);
+
+
     }
 
     public synchronized void turnOnTyper() {
