@@ -259,45 +259,45 @@ public class Viewer extends JFrame {
         receiverLayer.add(spinnerReceiverInterval, gbc);
 
         // =========== gamblerRPSLayer ===========
-        JPanel gambleRPSSelectionPanel = new JPanel();
-        gambleRPSSelectionPanel.setLayout(new GridLayout(2, 2));
-        gambleRPSSelectionPanel.add(radiobuttonRPSRock);
-        gambleRPSSelectionPanel.add(radiobuttonRPSPaper);
-        gambleRPSSelectionPanel.add(radiobuttonRPSScissors);
-        gambleRPSSelectionPanel.add(radiobuttonRPSRandom);
-        JPanel gambleRPSLayer = new JPanel();
-        gambleRPSLayer.setLayout(new GridBagLayout());
-        gambleRPSLayer.setBorder(BorderFactory.createTitledBorder("RPS"));
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;      gbc.gridy = 0;
-        gbc.gridwidth = 2;  gbc.gridheight = 1;
-        gbc.weightx = 1.0;  gbc.weighty = 1.0;
-        gbc.insets = new Insets(1, 1, 1, 1);
-        gbc.anchor = GridBagConstraints.CENTER;
-        gambleRPSLayer.add(checkboxEnableRPS, gbc);
-        gbc.gridx = 0;      gbc.gridy = 1;
-        gbc.gridwidth = 1;  gbc.gridheight = 1;
-        gbc.anchor = GridBagConstraints.EAST;
-        gambleRPSLayer.add(labelRPSStartDelay, gbc);
-        gbc.gridx = 1;      gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.WEST;
-        gambleRPSLayer.add(spinnerRPSStartDelay, gbc);
-        gbc.gridx = 0;      gbc.gridy = 2;
-        gbc.anchor = GridBagConstraints.EAST;
-        gambleRPSLayer.add(labelRPSInterval, gbc);
-        gbc.gridx = 1;      gbc.gridy = 2;
-        gbc.anchor = GridBagConstraints.WEST;
-        gambleRPSLayer.add(spinnerRPSInterval, gbc);
-        gbc.gridx = 0;      gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.EAST;
-        gambleRPSLayer.add(labelRPSGambleAmount, gbc);
-        gbc.gridx = 1;      gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.WEST;
-        gambleRPSLayer.add(spinnerRPSGambleCash, gbc);
-        gbc.gridx = 0;      gbc.gridy = 4;
-        gbc.gridwidth = 2;  gbc.gridheight = 1;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gambleRPSLayer.add(gambleRPSSelectionPanel, gbc);
+//        JPanel gambleRPSSelectionPanel = new JPanel();
+//        gambleRPSSelectionPanel.setLayout(new GridLayout(2, 2));
+//        gambleRPSSelectionPanel.add(radiobuttonRPSRock);
+//        gambleRPSSelectionPanel.add(radiobuttonRPSPaper);
+//        gambleRPSSelectionPanel.add(radiobuttonRPSScissors);
+//        gambleRPSSelectionPanel.add(radiobuttonRPSRandom);
+//        JPanel gambleRPSLayer = new JPanel();
+//        gambleRPSLayer.setLayout(new GridBagLayout());
+//        gambleRPSLayer.setBorder(BorderFactory.createTitledBorder("RPS"));
+//        gbc = new GridBagConstraints();
+//        gbc.gridx = 0;      gbc.gridy = 0;
+//        gbc.gridwidth = 2;  gbc.gridheight = 1;
+//        gbc.weightx = 1.0;  gbc.weighty = 1.0;
+//        gbc.insets = new Insets(1, 1, 1, 1);
+//        gbc.anchor = GridBagConstraints.CENTER;
+//        gambleRPSLayer.add(checkboxEnableRPS, gbc);
+//        gbc.gridx = 0;      gbc.gridy = 1;
+//        gbc.gridwidth = 1;  gbc.gridheight = 1;
+//        gbc.anchor = GridBagConstraints.EAST;
+//        gambleRPSLayer.add(labelRPSStartDelay, gbc);
+//        gbc.gridx = 1;      gbc.gridy = 1;
+//        gbc.anchor = GridBagConstraints.WEST;
+//        gambleRPSLayer.add(spinnerRPSStartDelay, gbc);
+//        gbc.gridx = 0;      gbc.gridy = 2;
+//        gbc.anchor = GridBagConstraints.EAST;
+//        gambleRPSLayer.add(labelRPSInterval, gbc);
+//        gbc.gridx = 1;      gbc.gridy = 2;
+//        gbc.anchor = GridBagConstraints.WEST;
+//        gambleRPSLayer.add(spinnerRPSInterval, gbc);
+//        gbc.gridx = 0;      gbc.gridy = 3;
+//        gbc.anchor = GridBagConstraints.EAST;
+//        gambleRPSLayer.add(labelRPSGambleAmount, gbc);
+//        gbc.gridx = 1;      gbc.gridy = 3;
+//        gbc.anchor = GridBagConstraints.WEST;
+//        gambleRPSLayer.add(spinnerRPSGambleCash, gbc);
+//        gbc.gridx = 0;      gbc.gridy = 4;
+//        gbc.gridwidth = 2;  gbc.gridheight = 1;
+//        gbc.anchor = GridBagConstraints.CENTER;
+//        gambleRPSLayer.add(gambleRPSSelectionPanel, gbc);
 
         // =========== gamblerDICELayer ===========
         JPanel gambleDICELayer = new JPanel();
@@ -329,11 +329,6 @@ public class Viewer extends JFrame {
         gbc.gridx = 1;      gbc.gridy = 3;
         gbc.anchor = GridBagConstraints.WEST;
         gambleDICELayer.add(spinnerDICEGambleCash, gbc);
-//        JPanel gamblerLayer = new JPanel();
-//        gamblerLayer.setLayout(new GridLayout(1, 2));
-//        gamblerLayer.setBorder(BorderFactory.createTitledBorder("Gambler"));
-//        gamblerLayer.add(gambleRPSLayer);
-//        gamblerLayer.add(gambleDICELayer);
 
         // =========== logMessageLayer ===========
         JPanel logMessageLayer = new JPanel(new BorderLayout());
@@ -360,7 +355,7 @@ public class Viewer extends JFrame {
         gbc.gridx = 0;      gbc.gridy = 1;
         subRootPanel.add(receiverLayer, gbc);
         gbc.gridx = 0;      gbc.gridy = 2;
-        subRootPanel.add(gambleRPSLayer, gbc);
+//        subRootPanel.add(gambleRPSLayer, gbc);
         gbc.gridx = 0;      gbc.gridy = 3;
         subRootPanel.add(gambleDICELayer, gbc);
         gbc.gridx = 1;      gbc.gridy = 0;
@@ -387,14 +382,14 @@ public class Viewer extends JFrame {
         spinnerReceiverStartDelay.addChangeListener(viewModel::spinnerReceiverStartDelay_ChangeListener);
         spinnerReceiverInterval.addChangeListener(viewModel::spinnerReceiverInterval_ChangeListener);
 
-        checkboxEnableRPS.addItemListener(viewModel::checkboxEnableRPS_ItemListener);
-        spinnerRPSStartDelay.addChangeListener(viewModel::spinnerRPSStartDelay_ChangeListener);
-        spinnerRPSInterval.addChangeListener(viewModel::spinnerRPSInterval_ChangeListener);
-        spinnerRPSGambleCash.addChangeListener(viewModel::spinnerRPSGambleAmount_ChangeListener);
-        radiobuttonRPSRock.addChangeListener(viewModel::radiobuttonRPSRock_ChangeListener);
-        radiobuttonRPSPaper.addChangeListener(viewModel::radiobuttonRPSPaper_ChangeListener);
-        radiobuttonRPSScissors.addChangeListener(viewModel::radiobuttonRPSScissors_ChangeListener);
-        radiobuttonRPSRandom.addChangeListener(viewModel::radiobuttonRPSRandom_ChangeListener);
+//        checkboxEnableRPS.addItemListener(viewModel::checkboxEnableRPS_ItemListener);
+//        spinnerRPSStartDelay.addChangeListener(viewModel::spinnerRPSStartDelay_ChangeListener);
+//        spinnerRPSInterval.addChangeListener(viewModel::spinnerRPSInterval_ChangeListener);
+//        spinnerRPSGambleCash.addChangeListener(viewModel::spinnerRPSGambleAmount_ChangeListener);
+//        radiobuttonRPSRock.addChangeListener(viewModel::radiobuttonRPSRock_ChangeListener);
+//        radiobuttonRPSPaper.addChangeListener(viewModel::radiobuttonRPSPaper_ChangeListener);
+//        radiobuttonRPSScissors.addChangeListener(viewModel::radiobuttonRPSScissors_ChangeListener);
+//        radiobuttonRPSRandom.addChangeListener(viewModel::radiobuttonRPSRandom_ChangeListener);
 
         checkboxEnableDICE.addItemListener(viewModel::checkboxEnableDICE_ItemListener);
         spinnerDICEStartDelay.addChangeListener(viewModel::spinnerDICEStartDelay_ChangeListener);
@@ -599,6 +594,9 @@ public class Viewer extends JFrame {
             updateView();
     }
 
+    /**
+     * Make the spinner dynamically trigger ChangeEvent when user is typing.
+     */
     public void setCommitsOnValidEditAsTrue(JSpinner spinner) {
         JFormattedTextField formattedTextField = ((JSpinner.DefaultEditor)spinner.getEditor()).getTextField();
         ((DefaultFormatter) formattedTextField.getFormatter()).setCommitsOnValidEdit(true);
